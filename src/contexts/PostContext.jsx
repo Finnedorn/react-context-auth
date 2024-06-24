@@ -33,26 +33,28 @@ const PostProvider = ({ children }) => {
     fetchPosts();
   }, []);
 
-  return (<>
+  return (
+  <>
     {/* do al value del provider il contenuto di posts */}
     <PostContext.Provider value={{posts}}>
         {children}
     </PostContext.Provider>
-  </>);
+  </>
+  );
 };
 
-// creo la mia funzione di use personalizzata in cui esporto il valore del context corrente
+// creo la mia funzione di hook personalizzata in cui esporto il valore del context corrente
 const usePosts = () => {
   // prendo il valore di posts dal context con useContext 
   const value = useContext(PostContext);
   //se non sono in un consumer del GlobalContext.Provider, value sarà undefined
   // perciò creo una condizione che generi un errore per segnalarmelo
   if(value === undefined){
-      throw new Error('Non sei dentro al Global Provider!');
+      throw new Error('Non sei dentro al Post Provider');
   }
   return value;
 }
 
 // esporto il provider e lo vado a definire in App 
-// ed esporto la funzione di use che userò nelle pages 
+// ed esporto la funzione di hook che userò nelle pages 
 export { PostProvider, usePosts };
