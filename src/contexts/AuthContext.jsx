@@ -34,7 +34,7 @@ const AuthProvider = ({children}) => {
 
     return(
     <>
-        <AuthContext.Provider value={{logValue}}>
+        <AuthContext.Provider value={logValue}>
             {children}
         </AuthContext.Provider>
     </>

@@ -1,5 +1,7 @@
 // import i moduli di react-router
 import { NavLink } from "react-router-dom";
+// importo l'hook di autenticazione
+import { useAuth } from "../../contexts/AuthContext";
 
 function Navbar() {
 
@@ -13,6 +15,8 @@ function Navbar() {
             path: "/posts",
         },
     ];
+
+    const { isLogged, logOut } = useAuth();
 
   return (
     <>
@@ -30,6 +34,18 @@ function Navbar() {
                             </NavLink>
                         </li>
                     ))}
+                    {/* se isLogged è false l'utente vedrà un linkbutton per la login page */}
+                    {!isLogged &&
+                        <li>
+                            <NavLink to={`/login`}>Login</NavLink>
+                        </li>
+                    }
+                    {/* altrimenti vedrà un pulsante di logout */}
+                    {isLogged &&
+                        <li>
+                            <button onClick={logOut}>Logout</button>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
