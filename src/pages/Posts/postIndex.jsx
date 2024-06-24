@@ -8,6 +8,7 @@ const PostIndex = () => {
 
   // con destructuring estrapolo i valori di posts dalla funzione di use
   const {posts} = usePosts();
+  console.log("renderizzo");
   
   return (
     <>

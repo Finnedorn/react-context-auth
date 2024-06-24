@@ -7,12 +7,17 @@ import { useAuth } from "../contexts/AuthContext";
 const LogChecker = ({ children }) => {
   // estrapolo isLogged dai valori di useAuth
   const { isLogged } = useAuth();
+  // attivo uselocation così da tenere memoria della pagina 
+  // che l'utente voleva visitare prima del redirect forzato
   const location = useLocation();
 
   // se isLogged è false l'utente non avrà effettuato il login
   // di conseguenza verrà redirezionato sulla pagina di login
+  console.log(isLogged);
   if (!isLogged) {
-    
+    // una volta verificato lo stato di isLogged
+    // effettuo un redirect sulla pagina che l'utente voleva raggiungere
+    // prima di essere stato redirezionato al login 
     return <Navigate to="/login" state={{ from: location }} />;
   }
 

@@ -1,18 +1,28 @@
 // importo l'hook di autenticazione
 import { useAuth } from "../../contexts/AuthContext";
+import { useLocation } from "react-router-dom";
 
 // creo la pagina di login dell'utente 
 const Login = () => {
     // estrapolo la funzione logIn 
     const { logIn } = useAuth();
 
+    // attivo uselocation così da tenere memoria della pagina 
+    // che l'utente voleva visitare prima del redirect forzato
+    const location = useLocation();
+
     // al submit del form 
     // prendo l'evento ed effettuo un prevent default
     // attivo la funzione di login che cambia il valore di isLogged
     // peremttendo all'utente di bypassare il middleware
     const handleLogin = (e) => {
+        // prevento il refresh della pagina
         e.preventDefault();
-        logIn();
+        // una volta verificato lo stato di isLogged
+        // effettuo un redirect sulla pagina che l'utente voleva raggiungere
+        // prima di essere stato redirezionato al login
+        const redirect = location.state?.from?.pathname || "/";
+        logIn(redirect);
     }
 
 

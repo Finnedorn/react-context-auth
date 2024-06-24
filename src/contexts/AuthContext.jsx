@@ -17,9 +17,8 @@ const AuthProvider = ({children}) => {
 
     // appena effettuato il login redireziono su home
     // oppure sulla pagina a cui voleva accedere l'utente al momento della dovuta richiesta di login
-    const logIn = (payload, redirect) => {
+    const logIn = (redirect) => {
         setIsLogged(true);
-        console.log(navigate);
         navigate(redirect || "/");
     }
 

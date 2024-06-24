@@ -64,7 +64,7 @@ const CardComponent = ({
               </div>
               <div className="ps-5 pb-2">
                 <Link to={`/posts/${slug}`} state={{post}}>
-                    <button className="btn btn-success me-2">
+                    <button className="btn btn-success me-2 fw-bold fs-5">
                       Leggi
                     </button>
                 </Link>

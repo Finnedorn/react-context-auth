@@ -8,6 +8,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import LogChecker from "./middlewares/logChecker";
 // importo la pagina di login
 import Login from "./pages/Login/Login";
+import { Outlet } from "react-router-dom";
 
 // import le rotte alle varie pagine
 import Home from "./pages/Home/Home";
@@ -23,31 +24,27 @@ function App() {
       <BrowserRouter>
         <PostProvider>
           <AuthProvider>
-          <Routes>
+            <Routes>
 
               {/* Estensione del layout "nav + footer" a tutte le pagine */}
               <Route path="/" element={<Layout />}>
-
                 {/* Rotte pubbliche */}
                 <Route path="*" element={<NotFound />} />
                 <Route index element={<Home />} />
                 <Route path="login" element={<Login />} />
-
-                {/* Rotte protette dal middleware di autenticazione */}
-                <Route element={<LogChecker />}>
-
-                  <Route path="posts">
-                    <Route index element={<PostIndex />} />
-                    <Route path=":id">
-                      <Route index element={<PostShow />} />
-                    </Route>
-                    <Route path="create" element={<PostCreate />} />
-                  </Route>
-
-                </Route>
-
               </Route>
 
+              {/* Rotte protette dal middleware di autenticazione */}
+              <Route path="/" element={<LogChecker><Layout /></LogChecker>}>
+               <Route path="posts">
+                <Route index element={<PostIndex />} />
+                <Route path=":id">
+                  <Route index element={<PostShow />} />
+                </Route>
+                <Route path="create" element={<PostCreate />} />
+              </Route>
+
+              </Route>
             </Routes>
           </AuthProvider>
         </PostProvider>
