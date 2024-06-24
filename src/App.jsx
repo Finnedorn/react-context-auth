@@ -6,10 +6,8 @@ import { PostProvider } from "./contexts/PostContext";
 import { AuthProvider } from "./contexts/AuthContext";
 // importo il middleware di autenticazione
 import LogChecker from "./middlewares/logChecker";
-// importo la pagina di login 
+// importo la pagina di login
 import Login from "./pages/Login/Login";
-
-
 
 // import le rotte alle varie pagine
 import Home from "./pages/Home/Home";
@@ -19,36 +17,36 @@ import PostIndex from "./pages/Posts/postIndex";
 import PostShow from "./pages/Posts/postShow";
 import PostCreate from "./pages/Posts/postCreate";
 
-
 function App() {
-
   return (
     <div className="App">
       <BrowserRouter>
         <PostProvider>
           <AuthProvider>
-            <Routes>
-              {/* essendo / la route base la uso per estendere
-              il layout "nav +footer" a tutte le pagine */}
+          <Routes>
+
+              {/* Estensione del layout "nav + footer" a tutte le pagine */}
               <Route path="/" element={<Layout />}>
-                {/* creo la route per il Not Found */}
+
+                {/* Rotte pubbliche */}
                 <Route path="*" element={<NotFound />} />
                 <Route index element={<Home />} />
-                <Route path="login" element={<Login/>} />
-                
+                <Route path="login" element={<Login />} />
+
                 {/* Rotte protette dal middleware di autenticazione */}
-                
+                <Route element={<LogChecker />}>
+
                   <Route path="posts">
-                    <Route index element={<LogChecker><PostIndex /></LogChecker>} />
+                    <Route index element={<PostIndex />} />
                     <Route path=":id">
                       <Route index element={<PostShow />} />
                     </Route>
                     <Route path="create" element={<PostCreate />} />
                   </Route>
-                
+
+                </Route>
+
               </Route>
-
-
 
             </Routes>
           </AuthProvider>

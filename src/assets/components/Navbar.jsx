@@ -36,14 +36,18 @@ function Navbar() {
                     ))}
                     {/* se isLogged è false l'utente vedrà un linkbutton per la login page */}
                     {!isLogged &&
-                        <li>
-                            <NavLink to={`/login`}>Login</NavLink>
+                        <li className=" nav-item fs-3 p-2">
+                            <NavLink to={`/login`} className=" nav-link active" aria-current="page">
+                                Login
+                            </NavLink>
                         </li>
                     }
                     {/* altrimenti vedrà un pulsante di logout */}
                     {isLogged &&
-                        <li>
-                            <button onClick={logOut}>Logout</button>
+                        <li onClick={logOut} style={{cursor: "pointer"}} className=" nav-item fs-3 p-2">
+                            <span className=" nav-link active" aria-current="page">
+                                Logout
+                            </span>
                         </li>
                     }
                 </ul>

@@ -8,6 +8,10 @@ const AuthContext = createContext();
 // setto il provider
 const AuthProvider = ({children}) => {
 
+    // storo usenavigate in una costante per poterla utilizzare
+    // una volta che esporterò logIn all'interno della pagina di login 
+    const navigate = useNavigate();
+
     // setto lo state di login, di base su false 
     const [isLogged, setIsLogged] = useState(false);
 
@@ -15,14 +19,15 @@ const AuthProvider = ({children}) => {
     // oppure sulla pagina a cui voleva accedere l'utente al momento della dovuta richiesta di login
     const logIn = (payload, redirect) => {
         setIsLogged(true);
-        useNavigate(redirect || "/");
+        console.log(navigate);
+        navigate(redirect || "/");
     }
 
     // premendo il tasto logout, setLogged passa a false
     // quindi si viene rispediti fuori dalle pagine private e alla pagina di login
     const logOut = () => {
         setIsLogged(false);
-        useNavigate("/login");
+        navigate("/login");
     }
 
     // impacchetto tutto ciò che mi serve esportare 
